@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] float moveSpeed = 1f;
+    [SerializeField] float moveSpeed = 5f;
+    [SerializeField] Rigidbody2D body;
 
-    private Vector3 direction;
+    private Vector2 direction;
 
     // Start is called before the first frame update
     void Start()
@@ -17,24 +18,23 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Get normalized direction vector and move the player
-        direction = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0f);        
+        direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));        
         direction.Normalize();
-
-        transform.position += direction * moveSpeed * Time.deltaTime; 
-
-        if(transform.position.x >= 20){
-            transform.position = new Vector3(0f, transform.position.y, 0f);
-        } else if(transform.position.x <= -20){
-            transform.position = new Vector3(0f, transform.position.y, 0f);
+ 
+        if(transform.position.x > 10){
+            transform.position = new Vector3(-10f, transform.position.y, 0f);
+        } else if(transform.position.x < -10){
+            transform.position = new Vector3(10f, transform.position.y, 0f);
         } 
 
-        if(transform.position.y >= 15f){
-            transform.position = new Vector3(transform.position.x, 0f, 0f);
-        } else if(transform.position.y <= -15f){
-            transform.position = new Vector3(transform.position.x, 0f, 0f);
-        } 
+        if(transform.position.y > 7.5f){
+            transform.position = new Vector3(transform.position.x, -7.5f, 0f);
+        } else if(transform.position.y < -7.5f){
+            transform.position = new Vector3(transform.position.x, 7.5f, 0f);
+        }
     }
 
-    
+    private void FixedUpdate() {
+        body.MovePosition(body.position + direction * moveSpeed * Time.deltaTime);
+    }
 }
