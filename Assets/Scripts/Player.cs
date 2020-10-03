@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {
     [SerializeField] float moveSpeed = 5f;
     [SerializeField] Rigidbody2D body;
+    
 
     private Vector2 direction;
 
@@ -32,6 +33,7 @@ public class Player : MonoBehaviour
         } else if(transform.position.y < -7.5f){
             transform.position = new Vector3(transform.position.x, 7.5f, 0f);
         }
+
     }
 
     private void FixedUpdate() {
