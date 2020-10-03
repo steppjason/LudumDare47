@@ -16,7 +16,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Dirt
   - 
   - 
   - 
@@ -38,6 +38,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 1320992031
+    locked: 0
+  - name: Foreground
+    uniqueID: 2284568885
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

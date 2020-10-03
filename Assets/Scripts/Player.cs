@@ -34,6 +34,8 @@ public class Player : MonoBehaviour
             transform.position = new Vector3(transform.position.x, 7.5f, 0f);
         }
 
+        transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.y);
+
     }
 
     private void FixedUpdate() {
