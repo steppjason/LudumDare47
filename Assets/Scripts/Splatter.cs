@@ -5,6 +5,8 @@ using UnityEngine;
 public class Splatter : MonoBehaviour
 {
     [SerializeField] int seconds = 1;
+    [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioClip audioClip;
 
     void Update(){
         StartCoroutine(SetInactive());
