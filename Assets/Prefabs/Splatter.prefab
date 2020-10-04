@@ -4831,5 +4831,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   seconds: 1
-  audioSource: {fileID: 0}
-  audioClip: {fileID: 8300000, guid: a1d0cb87a4ef345488d7ae0ec0afbec2, type: 3}
+  clip: {fileID: 8300000, guid: a1d0cb87a4ef345488d7ae0ec0afbec2, type: 3}
+  game: {fileID: 0}

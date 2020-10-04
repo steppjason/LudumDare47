@@ -12,6 +12,8 @@ public class Player : MonoBehaviour
     [SerializeField] int speechDelay;
     
     [SerializeField] GameObject gun;
+
+    [SerializeField] Game game;
     
 
     private Vector2 direction;
@@ -79,8 +81,14 @@ public class Player : MonoBehaviour
         } else {
             SayRandom();
         }
-        
     }
+
+    private void OnCollisionEnter2D(Collision2D other) {
+        if(other.gameObject.GetComponent<Enemy>()){
+            Death();
+        }
+    }
+
 
     private void SayRandom(){
         int pos = Random.Range(1, 100);
@@ -128,5 +136,11 @@ public class Player : MonoBehaviour
             EraseText();
             speechTimer = 0;
         }
+    }
+
+    private void Death(){
+        EraseText();
+        game.PauseGame(true);
+        gameObject.SetActive(false);
     }
 }

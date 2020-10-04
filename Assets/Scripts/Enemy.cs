@@ -7,8 +7,12 @@ public class Enemy : MonoBehaviour
     [SerializeField] float moveSpeed = 5f;
     [SerializeField] float rotSpeed = 3f;
     [SerializeField] Rigidbody2D body;
-
+    [SerializeField] AudioClip clip;
     [SerializeField] Animator animator;
+
+    [SerializeField] Game game;
+
+    private AudioManager audio;
 
     private GameObject player;
     private Vector3 target;
@@ -19,8 +23,17 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.Find("Player");
-        target = player.transform.position;
+        audio = game.GetComponent<AudioManager>();
+
+        if(GameObject.Find("Player")){
+            player = GameObject.Find("Player");
+            target = player.transform.position;
+        } else {
+            target = new Vector3(0,0,0);
+            player = null;
+        }
+        
+        
     }
 
     // Update is called once per frame
@@ -38,17 +51,19 @@ public class Enemy : MonoBehaviour
 
     public void Move(){
 
-        if(player.activeInHierarchy){
-            target = player.transform.position;
-            direction = (target - transform.position).normalized;
+        if(player != null){
+            if(player.activeInHierarchy){
+                target = player.transform.position;
+                direction = (target - transform.position).normalized;
+                body.MovePosition(body.position + direction.normalized * moveSpeed * Time.deltaTime);
+            }
         }
 
-        body.MovePosition(body.position + direction.normalized * moveSpeed * Time.deltaTime);
     }
 
     public void Damage(int damage){
         gameObject.SetActive(false);
-
+        audio.PlaySFX(clip);
         var splatter = SplatterController.GetAvailble();
         splatter.gameObject.SetActive(true);
         splatter.gameObject.transform.position = transform.position;

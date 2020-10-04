@@ -5,8 +5,11 @@ using UnityEngine.UI;
 
 public class Game : MonoBehaviour
 {
+
     [SerializeField] Text dayUI;
     [SerializeField] Text timerText;
+    [SerializeField] Text gameOverText;
+    [SerializeField] Text restartText;
     [SerializeField] int dayLength = 15;
 
     [SerializeField] Player player;
@@ -27,6 +30,8 @@ public class Game : MonoBehaviour
     private bool dayNine = true;
     private bool dayTwenty = true;
     private bool dayThirtyFive = true;
+
+    private bool GamePause = false;
     
 
     // Start is called before the first frame update
@@ -38,10 +43,16 @@ public class Game : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timer += Time.deltaTime;
-        UpdateDay();
-        
+        if(!GamePause){
+            timer += Time.deltaTime;
+            UpdateDay();
+        } else {
+            gameOverText.text = "Game Over";
+            restartText.text = "Press Space to restart";
+            
+        }
     }
+
 
     private void UpdateDay(){
         
@@ -100,5 +111,13 @@ public class Game : MonoBehaviour
         }
 
         dayUI.text = "Day " + day.ToString();
+    }
+
+    public void PauseGame(bool f){
+        GamePause = true;
+    }
+
+    public bool GetPauseState(){
+        return GamePause;
     }
 }

@@ -8,6 +8,11 @@ public class Weapon : MonoBehaviour
     [SerializeField] int numberOfProjectiles = 20;
     [SerializeField] GameObject parentProjectile;
     [SerializeField] int currentPowerLevel = 0;
+    [SerializeField] AudioClip clip;
+
+    [SerializeField] Game game;
+
+    private AudioManager audio;
 
     private Projectile[,] bulletList;
     private int nextBullet = 0;
@@ -17,6 +22,7 @@ public class Weapon : MonoBehaviour
     void Start()
     {
         InstantiateBullets();
+        audio = game.GetComponent<AudioManager>();
     }
 
     // Update is called once per frame
@@ -44,6 +50,7 @@ public class Weapon : MonoBehaviour
         bulletList[currentPowerLevel, nextBullet].transform.position = transform.position;
         bulletList[currentPowerLevel, nextBullet].SetDirection(target);
         bulletList[currentPowerLevel, nextBullet].gameObject.SetActive(true);
+        audio.PlaySFX(clip);
     }
 
 
