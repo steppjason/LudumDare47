@@ -49,9 +49,6 @@ public class Player : MonoBehaviour
             Loop();
         }
 
-        
-        
-
         transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.y);
 
         Aim();
@@ -86,7 +83,34 @@ public class Player : MonoBehaviour
     }
 
     private void SayRandom(){
-        
+        int pos = Random.Range(1, 100);
+
+        switch(pos){
+            case 8:
+                SetSpeech("This is making me dizzy");
+                return;
+            case 23:
+                SetSpeech("Hey, that looks like me");
+                return;
+            case 54:
+                SetSpeech("What is going on here?");
+                return;
+            case 73:
+                SetSpeech("Is there anyone out there?");
+                return;
+            case 90:
+                SetSpeech("I'm running in circles");
+                return;
+            case 41:
+                SetSpeech("Haven't I been here before?");
+                return;
+            case 81:
+                SetSpeech("What do they say about doing the same thing over and over...?");
+                return;
+            default:
+                SetSpeech("");
+                return;
+        }
     }
 
     private void EraseText(){

@@ -20,8 +20,14 @@ public class Game : MonoBehaviour
     private int curDay = 1;
     private float timer;
 
+    private bool dayOne = true;
     private bool dayTwo = true;
     private bool dayThree = true;
+    private bool dayFour = true;
+    private bool dayNine = true;
+    private bool dayTwenty = true;
+    private bool dayThirtyFive = true;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -50,6 +56,11 @@ public class Game : MonoBehaviour
             }
         }
 
+        if(day >= 1 && dayOne){
+            dayOne = false;
+            player.SetSpeech("Stuck on this planet. Guess I'll explore.");
+        }
+
 
         if(day >= 2 && dayTwo){
             dayTwo = false;
@@ -61,7 +72,31 @@ public class Game : MonoBehaviour
             enemySpawner.SetActive(true);
             alien.SetActive(true);
             gun.SetActive(true);
-            player.SetSpeech("What the fuck is that? Guess I better shoot it.");
+            player.SetSpeech("What the fuck is that? Guess I'll shoot it.");
+        }
+
+        if(day >= 4 && dayFour){
+            dayFour = false;
+            player.SetSpeech("More of them!?");
+        }
+
+
+        if(day >= 9 && dayNine){
+            dayNine = false;
+            player.SetSpeech("This shit is getting old");
+        }
+
+
+        if(day >= 20 && dayTwenty){
+            dayTwenty = false;
+            player.SetSpeech("My trigger finger is getting tired...");
+        }
+
+
+
+        if(day >= 35 && dayThirtyFive){
+            dayThirtyFive = false;
+            player.SetSpeech("How the hell am I still alive!?");
         }
 
         dayUI.text = "Day " + day.ToString();
