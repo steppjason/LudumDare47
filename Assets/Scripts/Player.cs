@@ -9,11 +9,15 @@ public class Player : MonoBehaviour
     [SerializeField] Rigidbody2D body;
 
     [SerializeField] Text speechBubble;
+    [SerializeField] int speechDelay;
     
     [SerializeField] GameObject gun;
     
 
     private Vector2 direction;
+
+    private bool firstLoop = true;
+    private float speechTimer;
 
     // Start is called before the first frame update
     void Start()
@@ -31,19 +35,27 @@ public class Player : MonoBehaviour
  
         if(transform.position.x > 10){
             transform.position = new Vector3(-10f, transform.position.y, 0f);
+            Loop();
         } else if(transform.position.x < -10){
             transform.position = new Vector3(10f, transform.position.y, 0f);
+            Loop();
         } 
 
         if(transform.position.y > 7.5f){
             transform.position = new Vector3(transform.position.x, -7.5f, 0f);
+            Loop();
         } else if(transform.position.y < -7.5f){
             transform.position = new Vector3(transform.position.x, 7.5f, 0f);
+            Loop();
         }
+
+        
+        
 
         transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.y);
 
         Aim();
+        CountSpeechTime();
     }
 
     private void FixedUpdate() {
@@ -60,6 +72,37 @@ public class Player : MonoBehaviour
         } else if(gun.transform.rotation.eulerAngles.z > 180){
             gun.GetComponent<SpriteRenderer>().flipX = true;
         }
+    }
 
+    private void Loop(){
+        
+        if(firstLoop){
+            SetSpeech("Wha- What just happened?");
+            firstLoop = false;
+        } else {
+            SayRandom();
+        }
+        
+    }
+
+    private void SayRandom(){
+        
+    }
+
+    private void EraseText(){
+        speechBubble.text = "";
+    }
+
+    public void SetSpeech(string str){
+        speechBubble.text = str;
+        speechTimer = 0;
+    }
+
+    private void CountSpeechTime(){
+        speechTimer += Time.deltaTime;
+        if(speechTimer > speechDelay){
+            EraseText();
+            speechTimer = 0;
+        }
     }
 }

@@ -41,17 +41,8 @@ public class Weapon : MonoBehaviour
 
     public void Fire(Vector3 target){
         GetAvailable();
-
-        Debug.Log("TARGET:" + target);
-        Debug.Log("NOT NORMALIZED?:" + (target - transform.position));
-        Debug.Log("NORMALIZE?:" + (target - transform.position).normalized);
-
         bulletList[currentPowerLevel, nextBullet].transform.position = transform.position;
-        //bulletList[currentPowerLevel, nextBullet].SetDirection((target - transform.position).normalized);
         bulletList[currentPowerLevel, nextBullet].SetDirection(target);
-        
-        
-
         bulletList[currentPowerLevel, nextBullet].gameObject.SetActive(true);
     }
 
